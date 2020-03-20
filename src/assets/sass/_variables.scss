@@ -1,2 +1,137 @@
+//CORES
+$cinza: #888888;
+$cinza999:lighten($cinza, 6.5%);
+$cinza666:#666;
+$cinza7D7E7F:#7D7E7F;
+$cinza-balao: #F4F2F2;
+$cinza-placeholder:#ccc;
+$cinza-claro:#DCDCDC;
+$cinza-claro-claro:darken(#F8F8F8, 3%);
+$cinza-bordas:#DDDDDD;
+$cinza-claro-escuro:#B8B8B8;
+$cinza-escuro:#525252;
+$cinza-escuro-2c:#2C2C2C;
+$cinza-ba:#BABABA;
+$cinza-preto:#333;
+$D8DADA:#D8DADA;
+$AAA:#AAA;
+$EEE:#EEE;
+$cinzaf6:#f6f6f6;
+$cinza-cancelar:#B8B9B9;
+$cinza-cancelar-bordas:#B9BABA;
+$cinza-menu-info:#D5D9D9;
+$D8D9D9:#D8D9D9;
+$B4B7B7:#B4B7B7;
+$dark-cinza:#DCDDDC;
 
-$gray-light: #BDBDBD;
+$verde:#65bf67;
+$branco:#ffffff;
+$vermelho:#ea4e3d;
+$vermelho-rosa:#F86C6B;
+$amarelo:#FFC107;
+$laranja:#f7941d;
+$darkorange:#EF7534;
+$azul:#1e88e5;
+$azul-1:#007FFF;
+$azul-bic:#00007F;
+$navyblue: #1C163A;
+$navyblue2: #080273;
+
+//padroes
+$cor-padrao:#633974;
+$cor-padrao-hover:#8859A4;
+
+$cinza-badge:#D2D8D8;
+
+/* toasts && alertas */
+$tolvio-success:#48C1C6 ;
+$tolvio-danger:#F86C6B;
+$tolvio-warning:#FFC107;
+$tolvio-info:#5696D0;
+$tolvio-info-navy:#31628C;
+$tolvio-info-navy-2:#074080;
+$tolvio-info-2:#4893D2;
+$tolvio-yellow:#D6A32A;
+$tolvio-yellow-1:#FBF6E3;
+
+
+/* user status */
+$status-online: $tolvio-success;
+$status-ocupado:#D2A600;
+$status-offline:#FF5450;
+
+//fluxo
+$home:#EE772A;
+$message:#7251A0;
+$question:#D4A22C;
+$topic_selection:#4DADA0;
+$survey:#0696CC;
+$transfer:#265AAE;
+$end:#F8F8F8;
+
+
+/* atividades */
+$atividade_edicao: $cor-padrao;
+$atividade_usuario: $cinza-escuro;
+$atividade_arquivo: $tolvio-info;
+$atividade_atendimento: $navyblue;
+
+
+
+$font-size-12px:12px;
+$font-size-14px:14px;
+$font-size-15px:15px;
+$font-size-16px:16px;
+$font-size-21px:21px;
+
+//ESTILOS PADRÃO WIDGET
+$cinza-icones: #C6C8C9;
+$font-size-titulo: 21px;
+$font-size-texto-balao: 14px;
+$font-size-icones: 17px;
+
+
+//cor dos baloes;
+$cor-message-bot-baloon: $tolvio-yellow;
+$cor-message-baloon-system-interno: $tolvio-yellow-1;
+$cor-message-baloon-system: $cinza-balao;
+$cor-message-baloon-user: $tolvio-info;
+
+
+
+
+//form
+$altura-form: calc(2.25rem + 6px);
+
+
+//variaveis padrao botao
+$botao-font-size:14px;
+$botao-border-radius:3px;
+$botao-border:1px solid transparent;
+$botao-padding: 0 13px;
+$botao-altura:36px;
+$botao-sm:2.25rem;
+$botao-md:$altura-form;
+$botao-lg:46px;
+
+$background: #f1f1f1;
+$backgroundf8:#f8f8f8;
+$bgMaisEscuro:#F6F6F6;
+
+//agents
+$bot-card-width:295px;
+
+
+//FONTE
+$font: 'Open Sans', Helvetica, Arial, sans-serif;
+
+
+//TAMANHOS de tela
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+
+
+$headerheigth: 60px;

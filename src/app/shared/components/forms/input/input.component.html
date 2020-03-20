@@ -1,0 +1,34 @@
+<div
+  class="form-group"
+  [class.has-error]="hasError"
+  [style.marginBottom]="marginBottom">
+
+  <label *ngIf="label || title" [for]="name" class="form-label" [class.sr-only]="srOnly" [class.title]="title">{{label || title}} <span *ngIf="getInputError('required')">*</span></label>
+
+  <div [class.input-group]="inputGroup" class="input-holder">
+    <div class="input-group-prepend" *ngIf="inputGroupPrepend" (click)="emitEvent($event, 'input:prepend:click')">
+      <span class="input-group-text" [innerHtml]="inputGroupPrependContent"></span>
+    </div>
+    <ng-content></ng-content>
+    <div class="input-group-append" *ngIf="inputGroupAppend" (click)="emitEvent($event, 'input:append:click')">
+      <span class="input-group-text" [innerHtml]="inputGroupAppendContent"></span>
+    </div>
+    <i class="clear-field fas fa-times" *ngIf="showClear" (click)="clearField()" [class.is-input-group]="inputGroup"></i>
+  </div>
+
+  <div class="form-text-group">
+    <p class="form-text error" *ngIf="hasError">
+      <span *ngIf="required">Required field.</span>
+      <span *ngIf="invalidEmail">invalid e-mail.</span>
+      <span *ngIf="invalidCEP">invalid postal code.</span>
+      <span *ngIf="customError">{{errorMessage}}</span>
+      <span *ngIf="validationError">{{validationErrorMsg}}</span>
+      <span *ngIf="senhaError">{{senhaErrorMsg}}</span>
+      <span *ngIf="maxLength">{{maxLengthError}}</span>
+      <span *ngIf="minLength">{{minLengthError}}</span>
+      <span *ngIf="isNotUnique">{{uniqueError}}</span>
+      <span *ngIf="erroCustomizado">{{erroCustomizado}}</span>
+    </p>
+  </div>
+
+</div>

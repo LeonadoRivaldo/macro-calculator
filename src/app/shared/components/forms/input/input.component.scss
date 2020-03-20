@@ -1,0 +1,27 @@
+@import "../../../../../assets/sass/imports";
+
+
+
+label.form-label{
+  span{
+    font-weight: inherit;
+    color: inherit;
+  }
+}
+
+.input-holder{
+  position: relative;
+}
+.clear-field{
+  top: 50%;
+  cursor:pointer;
+  transform: translateY(-50%);
+  right: 15px;
+  height: 14px;
+  font-size: 14px;
+  color:$cinza-claro-escuro;
+  position: absolute;
+  &.is-input-group{
+    right:50px;
+  }
+}
