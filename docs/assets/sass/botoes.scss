@@ -1,4 +1,4 @@
-@import "../../assets/scss/_imports";
+@import "./_imports";
 /* css para os botoes */
 %btn-macro-calc-success{
   @include botao($macro-calc-success, $branco);
