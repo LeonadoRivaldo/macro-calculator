@@ -1,22 +1,22 @@
-@import "../../assets/scss/_imports";
+@import "./_imports";
 /* css para os botoes */
-%btn-tolvio-success{
-  @include botao($tolvio-success, $branco);
+%btn-macro-calc-success{
+  @include botao($macro-calc-success, $branco);
 }
-%btn-tolvio-danger{
-  @include botao($tolvio-danger, $branco);
+%btn-macro-calc-danger{
+  @include botao($macro-calc-danger, $branco);
 }
-%btn-tolvio-warning{
-  @include botao($tolvio-warning, $branco);
+%btn-macro-calc-warning{
+  @include botao($macro-calc-warning, $branco);
 }
-%btn-tolvio-info{
-  @include botao($tolvio-info, $branco);
+%btn-macro-calc-info{
+  @include botao($macro-calc-info, $branco);
 }
-%btn-tolvio-info-navy{
-  @include botao($tolvio-info-navy, $branco);
+%btn-macro-calc-info-navy{
+  @include botao($macro-calc-info-navy, $branco);
 }
-%btn-tolvio-info-navy-2{
-  @include botao($tolvio-info-navy-2, $branco);
+%btn-macro-calc-info-navy-2{
+  @include botao($macro-calc-info-navy-2, $branco);
 }
 
 %btn-darkorange{
@@ -127,12 +127,12 @@
 
 $btnList:
   btn-navyblue2
-  btn-tolvio-success
-  btn-tolvio-danger
-  btn-tolvio-warning
-  btn-tolvio-info
-  btn-tolvio-info-navy
-  btn-tolvio-info-navy-2
+  btn-macro-calc-success
+  btn-macro-calc-danger
+  btn-macro-calc-warning
+  btn-macro-calc-info
+  btn-macro-calc-info-navy
+  btn-macro-calc-info-navy-2
   btn-danger
   btn-success
   btn-default

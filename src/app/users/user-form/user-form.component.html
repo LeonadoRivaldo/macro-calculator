@@ -1,1 +1,74 @@
-<p>user-form works!</p>
+<div class="contaier-fluid">
+  <form name="user-form" class="app-form" [formGroup]="userForm">
+
+    <mc-form-input name="user-name" label="Name">
+      <input
+        type="text"
+        class="form-control"
+        id="user-name"
+        formControlName="name"
+        placeholder="Type user name"
+        #userName
+      />
+    </mc-form-input>
+    <mc-form-input name="user-age" label="Age">
+      <input
+        type="text"
+        class="form-control"
+        id="user-age"
+        formControlName="age"
+        placeholder="Type user age"
+        #userAge
+      />
+    </mc-form-input>
+
+    <mc-form-input name="user-gender" label="Gender">
+      <div class="radio-group">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+      </div>
+    </mc-form-input>
+
+    <mc-form-input name="user-weight" label="Weight">
+      <input
+        type="text"
+        class="form-control"
+        id="user-weight"
+        formControlName="weight"
+        placeholder="Type user weight in kilograms"
+        #userWeight
+      />
+    </mc-form-input>
+
+    <mc-form-input name="user-weight" label="height">
+      <input
+        type="text"
+        class="form-control"
+        id="user-height"
+        formControlName="height"
+        placeholder="Type user height in centimeters"
+        #userHeight
+      />
+    </mc-form-input>
+
+    <div class="form-group botao-group">
+      <button class="botao btn-success" [disabled]="userForm.invalid">Save</button>
+      <button class="botao btn-danger">cancel</button>
+    </div>
+
+    <div class="card" *ngIf="formKeys">
+      <div class="card-body">
+        <p *ngFor="let key of formKeys; let i=index">
+          <b>{{key}}:</b> {{form[key].value}}
+        </p>
+      </div>
+    </div>
+
+  </form>
+</div>

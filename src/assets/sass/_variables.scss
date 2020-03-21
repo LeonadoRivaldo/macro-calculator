@@ -44,19 +44,19 @@ $cor-padrao-hover:#8859A4;
 $cinza-badge:#D2D8D8;
 
 /* toasts && alertas */
-$tolvio-success:#48C1C6 ;
-$tolvio-danger:#F86C6B;
-$tolvio-warning:#FFC107;
-$tolvio-info:#5696D0;
-$tolvio-info-navy:#31628C;
-$tolvio-info-navy-2:#074080;
-$tolvio-info-2:#4893D2;
-$tolvio-yellow:#D6A32A;
-$tolvio-yellow-1:#FBF6E3;
+$macro-calc-success:#48C1C6 ;
+$macro-calc-danger:#F86C6B;
+$macro-calc-warning:#FFC107;
+$macro-calc-info:#5696D0;
+$macro-calc-info-navy:#31628C;
+$macro-calc-info-navy-2:#074080;
+$macro-calc-info-2:#4893D2;
+$macro-calc-yellow:#D6A32A;
+$macro-calc-yellow-1:#FBF6E3;
 
 
 /* user status */
-$status-online: $tolvio-success;
+$status-online: $macro-calc-success;
 $status-ocupado:#D2A600;
 $status-offline:#FF5450;
 
@@ -73,7 +73,7 @@ $end:#F8F8F8;
 /* atividades */
 $atividade_edicao: $cor-padrao;
 $atividade_usuario: $cinza-escuro;
-$atividade_arquivo: $tolvio-info;
+$atividade_arquivo: $macro-calc-info;
 $atividade_atendimento: $navyblue;
 
 
@@ -92,10 +92,10 @@ $font-size-icones: 17px;
 
 
 //cor dos baloes;
-$cor-message-bot-baloon: $tolvio-yellow;
-$cor-message-baloon-system-interno: $tolvio-yellow-1;
+$cor-message-bot-baloon: $macro-calc-yellow;
+$cor-message-baloon-system-interno: $macro-calc-yellow-1;
 $cor-message-baloon-system: $cinza-balao;
-$cor-message-baloon-user: $tolvio-info;
+$cor-message-baloon-user: $macro-calc-info;
 
 
 

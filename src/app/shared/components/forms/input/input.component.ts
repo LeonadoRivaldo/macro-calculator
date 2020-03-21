@@ -125,6 +125,15 @@ export class InputComponent implements OnInit, AfterContentInit, OnChanges {
     return this.input.value && this.clear;
   }
 
+  get pattern() {
+    return this.hasError && this.getInputError('pattern') !== undefined;
+  }
+  get patternError() {
+    const error = this.getInputError('pattern');
+
+    return `Este deve conter ${error.requiredPattern.replace(/\//gmi, '')} caracteres.`;
+  }
+
   clearField(): void {
     this.clearEvent.emit({name: `clear:field`});
   }

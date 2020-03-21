@@ -24,6 +24,7 @@
       <span *ngIf="customError">{{errorMessage}}</span>
       <span *ngIf="validationError">{{validationErrorMsg}}</span>
       <span *ngIf="senhaError">{{senhaErrorMsg}}</span>
+      <span *ngIf="pattern">{{patternError}}</span>
       <span *ngIf="maxLength">{{maxLengthError}}</span>
       <span *ngIf="minLength">{{minLengthError}}</span>
       <span *ngIf="isNotUnique">{{uniqueError}}</span>

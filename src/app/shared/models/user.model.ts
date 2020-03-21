@@ -13,7 +13,9 @@ export interface IActivityLvl {
 export interface IUser {
   name: string;
   age: number;
+  gender: 'male' | 'female';
   weight: number;
   height: number;
   activity: ActivityType;
+  exObese?: boolean;
 }
