@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   api: 'http://localhost:3000',
-  jsonFolder: './assets/json'
+  jsonFolder: '/macro-calculator/assets/json'
 };
