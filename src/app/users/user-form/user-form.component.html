@@ -57,6 +57,13 @@
       />
     </mc-form-input>
 
+    <mc-form-input name="user-activity" label="Activity Level">
+      <select name="user-activity" id="user-activity" formControlName="activity">
+        <option value="">Select an option...</option>
+        <option [value]="item.value" [innerHTML]="item.label" *ngFor="let item of activityList"></option>
+      </select>
+    </mc-form-input>
+
     <div class="form-group botao-group">
       <button class="botao btn-success" [disabled]="userForm.invalid">Save</button>
       <button class="botao btn-danger">cancel</button>

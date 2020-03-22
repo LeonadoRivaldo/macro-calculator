@@ -5,7 +5,7 @@ export enum ACTIVITY_LVL {
   'active' = 1.725,
   'very_active' = 1.9,
 }
-export type ActivityType = keyof typeof ACTIVITY_LVL;
+export type ActivityType = keyof typeof ACTIVITY_LVL | string;
 export interface IActivityLvl {
   label: string;
   value: ActivityType;
