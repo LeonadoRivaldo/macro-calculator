@@ -3,5 +3,6 @@
   { "label": "Light Exercise (1 - 2 days / week)", "value": "light" },
   { "label": "Moderate Exercise (3 - 5 days / week)", "value": "moderate" },
   { "label": "Heavy Exercise (6 - 7 days / week)", "value": "active" },
-  { "label": "Athlete (2x per day)", "value": "very_active" }
+  { "label": "Athlete (2x per day)", "value": "very_active" },
+  { "label": "other", value:"" }
 ]
