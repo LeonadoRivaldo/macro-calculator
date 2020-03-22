@@ -6,6 +6,7 @@ import { InputComponent } from './components/forms/input/input.component';
 import { AddButtonComponent } from './components/buttons/add-button/add-button.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [ HeaderComponent, InputComponent, AddButtonComponent ],
@@ -14,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FontAwesomeModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
   ],

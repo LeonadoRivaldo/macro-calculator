@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faCalculator } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -10,10 +11,12 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 export class HeaderComponent implements OnInit {
   logo = faCalculator;
   title = 'Macro Calculator';
+  addUser = () => this.userService.addUser();
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
+
 
 }
