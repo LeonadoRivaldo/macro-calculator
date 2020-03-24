@@ -6,8 +6,9 @@ import { InputComponent } from './components/forms/input/input.component';
 import { AddButtonComponent } from './components/buttons/add-button/add-button.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
+import { CookieService } from 'ngx-cookie-service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [ HeaderComponent, InputComponent, AddButtonComponent ],
   imports: [
@@ -16,9 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [
-  ],
+  providers: [ CookieService ],
   exports: [
     HeaderComponent, InputComponent, AddButtonComponent,
     FontAwesomeModule, FormsModule, ReactiveFormsModule,

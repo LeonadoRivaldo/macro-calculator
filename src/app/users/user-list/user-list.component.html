@@ -1,6 +1,8 @@
 <main class="container-fluid p-0">
   <div class="row">
     <div class="col">
+      <p class="help-text" *ngFor="let user of users">{{user.name}}</p>
+      <p *ngIf="users.length == 0">No users found <a class="btn btn-primary" href="#" (click)="addUser(true)">add user</a></p>
     </div>
     <div class="col-12 col-md-4" *ngIf="showForm">
       <mc-user-form></mc-user-form>

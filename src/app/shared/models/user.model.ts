@@ -1,3 +1,5 @@
+import { DBModel } from '../services/cookie-db.service';
+
 export enum ACTIVITY_LVL {
   'very_low' = 1.2,
   'light' = 1.375,
@@ -10,7 +12,7 @@ export interface IActivityLvl {
   label: string;
   value: ActivityType;
 }
-export interface IUser {
+export interface IUser extends DBModel {
   name: string;
   age: number;
   gender: 'male' | 'female';

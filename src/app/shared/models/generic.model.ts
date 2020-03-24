@@ -13,7 +13,7 @@ export interface IRouteParams {
 
 
 export interface IGenericResponse<Model> {
-  menssage: string;
+  message: string;
   data: Model | Model[];
   error: boolean;
   errors?: any[];
@@ -29,9 +29,9 @@ export interface IRequestService<ServiceResponse, Model> {
 
 
 export interface IAPIService<Model> {
-  create(object: Model): Promise<IGenericResponse<Model>>;
-  update(object: Model): Promise<IGenericResponse<Model>>;
-  get(objectId: string): Promise<IGenericResponse<Model>>;
-  getAll(): Promise<IGenericResponse<Model>>;
-  delete(objectId: string): Promise<IGenericResponse<Model>>;
+  create(object: Model): Promise<Model>;
+  update(object: Model): Promise<Model>;
+  get(objectId: string): Promise<Model>;
+  getAll(): Promise<Model[]>;
+  delete(objectId: string): Promise<Model>;
 }

@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class HeaderComponent implements OnInit {
   logo = faCalculator;
   title = 'Macro Calculator';
-  addUser = () => this.userService.addUser();
+  addUser = () => this.userService.showUserForm();
 
   constructor(private userService: UserService) { }
 

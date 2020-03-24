@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { IActivityLvl } from 'src/app/shared/models/user.model';
 import { ReadJsonService } from 'src/app/shared/services/read-json.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 interface IContollerForm {
@@ -12,7 +13,7 @@ interface IContollerForm {
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
 
   activityList: IActivityLvl[] = [];
   userForm: FormGroup;
@@ -21,7 +22,8 @@ export class UserFormComponent implements OnInit {
     return this.userForm.controls;
   }
   constructor(
-    private readonly activityListService: ReadJsonService<IActivityLvl[]>
+    private readonly activityListService: ReadJsonService<IActivityLvl[]>,
+    private readonly userService: UserService
   ) {}
 
   async ngOnInit() {
@@ -38,6 +40,22 @@ export class UserFormComponent implements OnInit {
 
     this.formKeys = Object.keys(this.form);
     this.activityList = await this.activityListService.getJSON('activity_level_list.json');
+  }
+
+  ngOnDestroy(): void {
+    this.userForm.reset({});
+  }
+
+  /**
+   *  CLASS METHODS
+   */
+
+  save() {
+    this.userService.create(this.userForm.value);
+  }
+
+  cancel() {
+    this.userService.showUserForm(false);
   }
 
 }

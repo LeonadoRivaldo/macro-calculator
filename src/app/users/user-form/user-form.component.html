@@ -72,7 +72,7 @@
     </form>
   </div>
   <div class="card-footer botao-group">
-    <button class="botao btn-success" [disabled]="userForm.invalid">Save</button>
-    <button class="botao btn-cancelar btn-linha">cancel</button>
+    <button class="botao btn-success" [disabled]="userForm.invalid" (click)="save()">Save</button>
+    <button class="botao btn-cancelar btn-linha" (click)="cancel()">cancel</button>
   </div>
 </div>
