@@ -1,0 +1,90 @@
+@import "./_imports";
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+  "cinza": $cinza,
+  "cinza999": $cinza999,
+  "cinza666": $cinza666,
+  "cinza7D7E7F": $cinza7D7E7F,
+  "cinza-balao": $cinza-balao,
+  "cinza-placeholder": $cinza-placeholder,
+  "cinza-claro": $cinza-claro,
+  "cinza-claro-claro": $cinza-claro-claro,
+  "cinza-bordas": $cinza-bordas,
+  "cinza-claro-escuro": $cinza-claro-escuro,
+  "cinza-escuro": $cinza-escuro,
+  "cinza-ba": $cinza-ba,
+  "cinza-preto": $cinza-preto,
+  "D8DADA": $D8DADA,
+  "B4B7B7": $B4B7B7,
+  "AAA": $AAA,
+  "cinza-eee": $EEE,
+  "verde": $verde,
+  "branco": $branco,
+  "vermelho": $vermelho,
+  "vermelho-rosa": $vermelho-rosa,
+  "amarelo": $amarelo,
+  "laranja": $laranja,
+  "darkorange": $darkorange,
+  "cinza-menu-info": $cinza-menu-info,
+  "azul": $azul,
+  "azul-1": $azul-1,
+  "azul-bic": $azul-bic,
+  "navyblue": $navyblue,
+  "navyblue2": $navyblue2,
+  "cor-padrao": $cor-padrao,
+  "cor-padrao-hover": $cor-padrao-hover,
+  "background": $background,
+  "backgroundf8": $backgroundf8,
+  "bgMaisEscuro": $bgMaisEscuro,
+  'macro-calc-success':$macro-calc-success,
+  'macro-calc-danger':$macro-calc-danger,
+  'macro-calc-warning':$macro-calc-warning,
+  'macro-calc-info':$macro-calc-info,
+  'macro-calc-info-navy':$macro-calc-info-navy,
+  'macro-calc-info-navy-2':$macro-calc-info-navy-2,
+  'macro-calc-yellow':$macro-calc-yellow,
+  'status-online':$status-online,
+  'status-ocupado':$status-ocupado,
+  'status-offline':$status-offline,
+  ),
+  $theme-colors
+);
+
+  @mixin text-color($parent, $color) {
+    #{$parent}{
+      color:$color!important;
+      &-hover:hover{
+        color:$color!important;
+      }
+      &-dark{
+        color:darken($color, 10%)!important;
+      }
+      &-light{
+        color:lighten($color, 10%)!important;
+      }
+      &-background{
+        background-color:$color!important;
+        &-dark{
+          background-color:darken($color, 10%)!important;
+        }
+        &-light{
+          background-color:lighten($color, 10%)!important;
+        }
+      }
+      &-border{
+        border-color:$color!important;
+      }
+    }
+  }
+
+  //subclasses
+  @each $color, $value in $theme-colors {
+    @include text-color(".#{$color}", $value);
+  }
+
+.text-danger-hover:hover,
+.text-danger{
+  color:$vermelho!important;
+}

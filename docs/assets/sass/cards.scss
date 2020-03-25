@@ -1,0 +1,246 @@
+@import "./_imports";
+.card{
+  display:flex;
+  flex:1 0 auto;
+  max-width:100%;
+  height:100%;
+
+  &.card-clickable{
+    .card-body:not(.table-list-card){
+      cursor: pointer;
+    }
+    .card-header{
+      cursor: pointer;
+    }
+
+  }
+  &.card-shadow{
+    @include transicao;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,0), 0 2px 2px 0 rgba(0,0,0,0), 0 1px 5px 0 rgba(0,0,0,0);
+
+    &:hover:not(.inativo){
+      @extend %card-shadow;
+      // border-color:darken($cinza-bordas, 15%);
+      .card-body{
+        .card-title{
+        }
+      }
+    }
+
+  }
+  &.inativo{
+    background:$backgroundf8;
+    .card-body{
+      opacity:0.3;
+      .agent-avatar{}
+      .card-title{}
+    }
+  }
+  &.table-list-card{
+    .card-header{}
+    .card-body{
+      max-height: 360px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+  &.card-preview{
+    .card-header{
+      padding:10px 15px;
+      background:$backgroundf8;
+      @extend %text3
+    }
+    .card-body{
+      padding: 10px 15px;
+      .card-body-content{
+        flex:1 0 100%;
+        max-width:100%;
+      }
+
+      .card-text{
+        margin:0;
+        @extend %text3;
+      }
+
+    }
+  }
+  &.conteudo-card{
+    .card-header{
+      @extend %text3;
+      .remover{
+        @include icone("true");
+      }
+    }
+  }
+  &.texto{
+    .card-header{}
+    .card-body{
+      .bloco-texto{
+        .item{}
+      }
+    }
+  }
+  &.carrossel{
+    .card-header{}
+    .card-body{
+      padding:5px 0;
+      .bloco-carrosel{
+        padding:0px 2.5px;
+        .item{
+          min-width:219px;
+          // max-width:243px;
+          height:375px;
+
+
+
+
+          padding: 0 2.5px;
+          margin: 0 0 5px;
+          &:first-child{
+          }
+          &:last-child{
+          }
+          &.item{
+            .card{
+              background:$backgroundf8;
+              .card-body{
+                .card-title{}
+                .card-form{}
+              }
+            }
+          }
+          &.new{
+            // height:368px;
+          }
+
+          &.preview{
+            height: auto;
+            .carrosel-card-item{
+              padding:0px 0 14px;
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+  &.carrosel-card-item{
+    z-index: 1;
+    border:0;
+    .card-body{
+      padding:0 7px!important;
+      max-height: initial;
+      .title{
+        padding: 14px 5px 11px;
+        font-size:14px;
+        line-height: 1.2;
+        margin-bottom:11px;
+        border-bottom:1px solid $cinza-bordas;
+
+        i.close{
+          @extend %icon;
+        }
+      }
+      .card-text{
+        padding-left:18px;
+        margin-bottom:13px;
+        width: 200px;
+        margin: auto;
+        @extend %hide-text-overflow;
+        margin-bottom: 10px;
+        line-height: 1.2;
+        &.primeiro{
+          margin-top:16px;
+        }
+        &.ultimo{
+          margin-bottom:0;
+        }
+      }
+      .card-form{
+        margin-top:11px;
+      }
+    }
+  }
+  &.card-motor-bot{
+    background: #fff;
+    min-height: 200px;
+    /* subclasses */
+    &.ativo{
+      background: $backgroundf8;
+      border: {
+        width:2px;
+        color:$cor-padrao;
+      }
+    }
+    &.inativo{
+
+    }
+    /* filhos */
+    .card-body{
+      position:relative;
+      padding:15px;
+      .card-title{
+        margin-bottom:11px;
+        img{}
+      }
+      .card-text{
+        @extend %text2;
+        margin-bottom: 11px;
+        line-height: 19px;
+        .link-saiba-mais{}
+      }
+      .botao-motor{
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+      }
+    }
+  }
+  &.card-conta-options{
+    height:auto;
+  }
+  &.card-chat{
+    .card-header{}
+    .card-body{}
+  }
+}
+.preview-tab-content-container{
+  .card{
+    &.carrossel:not(.carrosel-card-item){
+       .card-body{
+         padding:15px;
+         .bloco-carrosel{
+           padding:0;
+            .item{
+              padding:0;
+              margin:7.5px 0;
+              &:first-child{
+                margin-top:0;
+              }
+              &:last-child{
+                margin-bottom:0;
+              }
+            }
+         }
+       }
+    }
+  }
+}
+.table-list-card-preview-container{
+  .item-container{
+    .item-content-container{
+      .card-text{
+        @extend %text3;
+      }
+    }
+  }
+}
+
+
+@media (min-width: 576px){
+}
+@media (min-width: 768px){
+}
+@media (min-width: 1400px){
+}

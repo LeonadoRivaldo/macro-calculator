@@ -1,0 +1,234 @@
+@import "./_imports";
+
+$form-fields: input textarea;
+
+%u-form-input-error{
+  @extend %u-color-error;
+  @extend %u-bd-color-error;
+  &:focus{
+    @extend %u-bd-color-error;
+  }
+}
+
+
+%u-from-padding-bottom{
+  padding-bottom:35px;
+}
+
+.app-form{
+  width:100%;
+  display:block;
+  background: $branco;
+  height:100%;
+
+
+  //classe para labels
+  .form-label{
+    @extend %text6;
+    margin-bottom:0;
+    font-weight: bold;
+    &.title{
+      margin:0 0 20px;
+      font-size: 16px;
+    }
+
+    &.form-subgroup{
+      border-bottom: 1px solid rgba(204, 204, 204, 0.4);
+      width: 100%;
+    }
+
+    span{
+      color: inherit;
+    }
+  }
+
+  .form-title{
+    @extend %form-title;
+  }
+  .form-subtitle{
+    @extend %text4;
+  }
+
+  //classe de textos de apoio
+  .form-text{
+    font-size: 12px;
+    margin:0;
+    &.error{
+      @extend %u-color-error;
+    }
+
+    &.help-text{
+      color:$cinza666;
+    }
+    &.info{
+      font-weight:bold;
+      color:$cinza-preto;
+    }
+
+    span{ color:inherit; }
+
+  }
+
+  .form-text-group{
+    .form-text {
+      span{
+        padding: 0 2.5px;
+        &:first-child{
+         padding-left:0;
+        }
+        &:last-child{
+          padding-right:0;
+        }
+      }
+    }
+  }
+
+  textarea{
+    resize:vertical;
+    min-height:60px;
+    &.form-control{
+      height: 120px;
+    }
+  }
+
+  //classe dos campos
+  .form-control{
+    height: $altura-form;
+    color:$cinza-escuro;
+    font-size:15px;
+    &.error{
+      @extend %u-form-input-error;
+    }
+    &:focus{
+      @extend %u-bd-color-padrao;
+    }
+
+    &:disabled,
+    &[readonly]{
+      @extend %text-readonly;
+    }
+
+    &.has-clear-btn{
+      padding-right:20px;
+    }
+
+    &::-webkit-input-placeholder { color:$cinza-placeholder; font-size:15px; }
+    &::-moz-placeholder{ color:$cinza-placeholder; font-size:15px;  }
+    &:-ms-input-placeholder{ color:$cinza-placeholder; font-size:15px;  }
+    &:-moz-placeholder{ color:$cinza-placeholder; font-size:15px;  }
+  }
+  //especificação qdo dentro de form-group
+  .form-group{
+    &.has-error{
+      .form-control{
+        @extend %u-form-input-error;
+      }
+    }
+
+    //subgroups
+    .form-check{
+      padding:0;
+      .form-label{
+        &.form-check-label{
+          // cursor:pointer;
+        }
+      }
+    }
+
+    &.sub-group{
+      width:100%;
+    }
+
+    .form-label{}
+    .form-control{}
+    .form-text{}
+  }
+  .input-group{
+    .input-group-text{
+      // color:$cinza-placeholder;
+      background: #f8f8f8;
+      font-size: 14px;
+    }
+    .input-group-prepend{
+      .input-group-text{}
+    }
+    .input-group-append{
+      .input-group-text{}
+    }
+  }
+  &.avatar-form{}
+  &.configuracoes-form{
+    height: calc( 100% - 50px );
+    overflow: hidden;
+    overflow-y: auto;
+    padding-right: 15px;
+    padding-top: 20px;
+    margin-top: 13px;
+    @extend %u-from-padding-bottom;
+  }
+  &.sidebar-form{
+    .content{
+      padding-top:35px;
+      padding-bottom:35px;
+      overflow:hidden;
+      overflow-y:auto;
+      height:100%;
+      &.main{
+        padding-right:50px;
+        border-right:1px solid $cinza-bordas;
+        // max-width:800px;
+      }
+      &.sidebar{
+        padding: {
+          left:0;
+          right:0;
+        }
+      }
+    }
+  }
+  &.padding-bottom{
+    @extend %u-from-padding-bottom;
+  }
+
+  @each $ff in $form-fields{
+    #{$ff}:-webkit-autofill{
+      @include webkit-autofill;
+    }
+    #{$ff}:-webkit-autofill:focus{
+      @include webkit-autofill;
+    }
+
+  }
+
+
+
+}
+
+input[type=number] { -moz-appearance:textfield; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+
+@media (min-width: 576px){
+  .tolvbots-form{
+    &.avatar-form{
+      $avatarColsize:240px;
+      .col-avatar{
+        max-width: $avatarColsize;
+      }
+      .col-form{
+        max-width: calc( 100% - #{ $avatarColsize } );
+      }
+
+      &.configuracoes-form{
+        $avatarColsize:200px;
+        .col-avatar{
+          max-width: $avatarColsize;
+        }
+        .col-form{
+          max-width: calc( 100% - #{ $avatarColsize } );
+        }
+      }
+    }
+  }
+}
