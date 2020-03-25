@@ -51,7 +51,7 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
     }
 
     if (!response.error) {
-      return of(response)
+      return of(response);
     } else {
       throw this.generateError(path, response, status, response.message);
     }

@@ -5,11 +5,12 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UsersComponent } from './users.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 
 
 @NgModule({
-  declarations: [ UserListComponent, UserFormComponent, UsersComponent],
+  declarations: [ UserListComponent, UserFormComponent, UsersComponent, UserCardComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -21,3 +21,16 @@ export interface IUser extends DBModel {
   activity: ActivityType;
   exObese?: boolean;
 }
+
+class User implements IUser {
+  [key: string]: any;
+  name: string;
+  age: number;
+  gender: 'male' | 'female';
+  weight: number;
+  height: number;
+  activity: string;
+  exObese?: boolean;
+  // tslint:disable-next-line: variable-name
+  _id?: string;
+}
