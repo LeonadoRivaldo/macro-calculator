@@ -5,21 +5,40 @@ import { v4 } from 'uuid';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
 
-enum PATHS {
-  'http://localhost:3000/user' = 'mc_user_',
-  'http://localhost:3000/user/list' = 'mc_user_'
+function parseQuery<T>(query: string): T {
+  const querryArr = query.split('&');
+  console.log({querryArr});
+  const queryObj = {};
+  querryArr.forEach(param => {
+    const [key, value] = param.split('=');
+    queryObj[key] = decodeURIComponent(value);
+  });
+  return queryObj as T;
 }
 
-enum PATHS_MESSAGE_SUCCESS{
-  'http://localhost:3000/user' = 'User created!',
-  'http://localhost:3000/user/list' = 'Users found'
+enum COOKIE_NAME {
+  USER = 'mc_user_'
 }
-enum PATHS_MESSAGE_ERROR {
 
-}
-enum PATHS_INDEX {
-  'http://localhost:3000/user' = 'name'
-}
+const PATHS = {
+  'http://localhost:3000/user/create': COOKIE_NAME.USER,
+  'http://localhost:3000/user/remove': COOKIE_NAME.USER,
+  'http://localhost:3000/user/list': COOKIE_NAME.USER,
+};
+
+const PATHS_MESSAGE_SUCCESS = {
+  'http://localhost:3000/user/create': 'User created!',
+  'http://localhost:3000/user/remove': 'User removed!',
+  'http://localhost:3000/user/list': 'Users found!'
+};
+
+const PATHS_MESSAGE_ERROR = {
+  'http://localhost:3000/user/create': 'User already exists!',
+  'http://localhost:3000/user/remove': 'User not found!',
+};
+const PATHS_INDEX = {
+  'http://localhost:3000/user/create': 'name'
+};
 
 
 export interface DBModel {
@@ -35,66 +54,79 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
   constructor(private readonly cookies: CookieService) {}
 
   get(path: string): Observable<IGenericResponse<any>> {
-    const response: IGenericResponse<Model> = { data: null, error: true, message: PATHS_MESSAGE_ERROR[path] };
-    const status = 400;
-    if ( path.indexOf('list') > -1 ) {
-      const list = this._getAll(PATHS[path]);
+    const { pathUrl, query } = this._getQuery<{ id: string }>(path);
+    const { errorMessage, successMessage, cookieName } = this._options(pathUrl);
+    const { response, status } = this._response(errorMessage);
+    const listRegex = /(\/list\/?)/gim;
+    const getRegex = /(\/get\/?)/gim;
+
+    if ( listRegex.test(path) ) {
+      const list = this._getAll(cookieName);
       response.error = false;
       response.data = list;
       if ( list.length > 0 ) {
-        response.message = PATHS_MESSAGE_SUCCESS[path];
+        response.message = successMessage;
       } else {
-        response.message = `No ${PATHS_MESSAGE_SUCCESS[path].toLowerCase()}`;
+        response.message = `No ${successMessage.toLowerCase()}`;
       }
-    } else {
-      // TODO GET SINGLE;
+    } else if ( getRegex.test(path) ) {
     }
 
     if (!response.error) {
       return of(response);
     } else {
-      throw this.generateError(path, response, status, response.message);
+      throw this._error(path, response, status, response.message);
     }
   }
   post(path: string, obj: Model): Observable<IGenericResponse<Model>> {
-    const cookieName = PATHS[path];
-    const cookieIndex = PATHS_INDEX[path];
+    const { errorMessage, successMessage, cookieName, cookieIndex } = this._options(path);
+    const { response, status } = this._response(errorMessage);
     const pathValues = this._getAll(cookieName);
     const exists = pathValues.some( v => v[cookieIndex] === obj[cookieIndex] );
-    const response: IGenericResponse<Model> = { data: null, error: true, message: PATHS_MESSAGE_ERROR[path]};
-
     if ( !exists ) {
-      response.message = PATHS_MESSAGE_SUCCESS[path];
+      response.message = successMessage;
       response.data = this._create( PATHS[path], obj );
       return of( response );
     } else {
-      throw this.generateError(path, response, 400, response.message);
+      throw this._error(path, response, status, response.message);
     }
 
   }
   put(path: string, obj: Model): Observable<IGenericResponse<Model>> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   patch(path: string, obj: Model): Observable<IGenericResponse<Model>> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   delete(path: string): Observable<IGenericResponse<Model>> {
-    throw new Error("Method not implemented.");
+    const { pathUrl, query } = this._getQuery<{ id: string }>(path);
+    const { errorMessage, successMessage, cookieName } = this._options(pathUrl);
+    const { response, status } = this._response(errorMessage, 404);
+    const cookie = this._get(`${cookieName}${query.id}`);
+    if ( cookie ) {
+      this._remove(cookieName);
+      response.data = cookie;
+      response.message = successMessage;
+      return of(response);
+    } else {
+      throw this._error(path, response, status, 'user not found');
+    }
   }
 
 
   /** INTERNAL */
-  private generateError(url, error: IGenericResponse<Model>, status, statusText) {
-    return new HttpErrorResponse({ error, url, status, statusText});
-  }
+
   private _update(cookieName: string, value: Model): boolean {
     return true;
   }
   private _get(cookieName: string): Model {
-    const object: Model = undefined;
-    return object;
+    if ( this.cookies.check(cookieName) ) {
+      return JSON.parse(this.cookies.get(cookieName)) as Model;
+    } else {
+      return undefined;
+    }
   }
-  private _getAll(cookieName: string): Model[]{
+  private _getAll(cookieName: string): Model[] {
     const cookies = this.cookies.getAll();
     return Object.keys(cookies).map((key) => {
       if ( key.indexOf(cookieName) > -1 ) {
@@ -112,8 +144,35 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
     this.cookies.set(cookieName, cookieValue, 90);
     return object as Model;
   }
-  private _remove(cookieName: string, value: Model): boolean {
-    return true;
+  private _remove(cookieName: string): void {
+    this.cookies.delete(cookieName);
+  }
+
+
+  private _response(message, status = 400, data = null, error = true) {
+    const response: IGenericResponse<Model> = { data, error, message};
+    return { response, status };
+  }
+  private _error(url, error: IGenericResponse<Model>, status, statusText) {
+    return new HttpErrorResponse({ error, url, status, statusText});
+  }
+  private _options(path: string) {
+    return {
+      cookieName: PATHS[path],
+      successMessage: PATHS_MESSAGE_SUCCESS[path],
+      errorMessage: PATHS_MESSAGE_ERROR[path],
+      cookieIndex: PATHS_INDEX[path]
+    };
+  }
+
+
+  private _getQuery<T>(path: string) {
+    const [pathUrl, queryString] = path.split('?');
+    let query: T;
+    if ( queryString ) {
+      query = parseQuery<T>(queryString);
+    }
+    return { pathUrl, query };
   }
 
 

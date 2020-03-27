@@ -29,15 +29,8 @@ export class UserService implements IAPIService<IUser> {
 
   async create(object: IUser): Promise<IUser> {
     try {
-      return await this.http.post(`${environment.api}/user`, object)
-      .pipe(
-        map(resp => {
-          this.modalService.dismissAll();
-          this.notify.success(resp.message);
-          this.userActions.next({ name: 'getUsers', value: true });
-          return resp.data as IUser;
-        })
-      )
+      return await this.http.post(`${environment.api}/user/create`, object)
+      .pipe(map(resp => this.handleSuccess(resp)))
       .toPromise();
     } catch (error) {
       return this.handleError(error, 'create').toPromise();
@@ -53,19 +46,20 @@ export class UserService implements IAPIService<IUser> {
   async getAll(): Promise<IUser[]> {
     try {
       return await this.http.get(`${environment.api}/user/list`)
-      .pipe(
-        map(resp => {
-          this.notify.success(resp.message);
-          return resp.data as IUser[];
-        })
-      )
+      .pipe(map(resp => this.handleSuccess<IUser[]>(resp, null)))
       .toPromise();
     } catch (error) {
       return this.handleError(error, 'getAll').toPromise();
     }
   }
-  delete(objectId: string): Promise<IUser> {
-    throw new Error("Method not implemented.");
+  async delete(objectId: string): Promise<IUser> {
+    try {
+      return this.http.delete(`${environment.api}/user/remove?id=${objectId}`)
+      .pipe(map(resp => this.handleSuccess(resp)))
+      .toPromise();
+    } catch (error) {
+      return this.handleError(error, 'delete').toPromise();
+    }
   }
 
   private handleError(error: HttpErrorResponse, method: string) {
@@ -88,6 +82,13 @@ export class UserService implements IAPIService<IUser> {
     return of(null);
   }
 
-
+  private handleSuccess<T = IUser>(resp: IGenericResponse<T>, action = 'getUsers') {
+    this.modalService.dismissAll();
+    this.notify.success(resp.message);
+    if (action) {
+      this.userActions.next({ name: action, value: true });
+    }
+    return resp.data as T;
+  }
 
 }

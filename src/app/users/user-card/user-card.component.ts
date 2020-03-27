@@ -3,6 +3,7 @@ import { IUser, IActivityLvl } from 'src/app/shared/models/user.model';
 import { Confirmable } from 'src/app/shared/common/decorators';
 import { faEdit, faTrashAlt, faEye } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/shared/services/user.service';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'mc-user-card',
@@ -13,6 +14,7 @@ export class UserCardComponent implements OnInit {
   @Input() user: IUser;
 
   icons = { faEdit, faTrashAlt, faEye };
+  modal: NgbModalRef;
   userProps = Object.keys;
 
   get name(): string {
@@ -20,6 +22,7 @@ export class UserCardComponent implements OnInit {
   }
 
   constructor(
+    private readonly modalService: NgbModal,
     private readonly userService: UserService
   ) { }
 
@@ -29,14 +32,12 @@ export class UserCardComponent implements OnInit {
 
 
   @Confirmable('Are you sure that?')
-  remove() {
-    // add remove
-    alert('TODO remove');
+  async remove() {
+    await this.userService.delete(this.user._id);
   }
 
   edit() {
-    alert('TODO edit');
-    // call service and open form with user data
+    // continue
   }
 
   view() {

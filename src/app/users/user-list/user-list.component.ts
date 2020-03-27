@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { IUser } from 'src/app/shared/models/user.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UserFormComponent } from '../user-form/user-form.component';
 @Component({
   selector: 'mc-user-list',
@@ -10,8 +10,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
 })
 export class UserListComponent implements OnInit {
   showForm = false;
-  users: IUser[];
-
+  users: IUser[] = [];
 
   constructor(
     private readonly userService: UserService,

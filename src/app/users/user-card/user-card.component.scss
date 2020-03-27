@@ -1,4 +1,4 @@
-
+@import "../../../assets/sass/imports";
 
 .actions{
   position: absolute;
@@ -7,6 +7,27 @@
   display: flex;
   align-items: center;
   fa-icon{
+    cursor: pointer;
     padding: 0px 5px;
+    font-size: 18px;
+    transition: all ease 0.5s;
+
+    &.view{
+      padding-top: 3px;
+
+      &:hover{
+        color: darken($macro-calc-success, 20%);
+      }
+    }
+    &.edit{
+      &:hover{
+        color: $macro-calc-info;
+      }
+    }
+    &.remove{
+      &:hover{
+        color: $vermelho;
+      }
+    }
   }
 }
