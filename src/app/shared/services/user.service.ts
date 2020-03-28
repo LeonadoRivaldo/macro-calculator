@@ -40,8 +40,14 @@ export class UserService implements IAPIService<IUser> {
   update(object: IUser): Promise<IUser> {
     throw new Error("Method not implemented.");
   }
-  get(objectId: string): Promise<IUser> {
-    throw new Error("Method not implemented.");
+  async get(objectId: string): Promise<IUser> {
+    try {
+      return await this.http.get(`${environment.api}/user/get?id=${objectId}`)
+      .pipe(map(resp => this.handleSuccess<IUser>(resp, null, false)))
+      .toPromise();
+    } catch (error) {
+      return this.handleError(error, 'get').toPromise();
+    }
   }
   async getAll(): Promise<IUser[]> {
     try {
@@ -82,9 +88,13 @@ export class UserService implements IAPIService<IUser> {
     return of(null);
   }
 
-  private handleSuccess<T = IUser>(resp: IGenericResponse<T>, action = 'getUsers') {
-    this.modalService.dismissAll();
+  private handleSuccess<T = IUser>(resp: IGenericResponse<T>, action = 'getUsers', closeModal = true) {
     this.notify.success(resp.message);
+
+    if ( closeModal ) {
+      this.modalService.dismissAll();
+    }
+
     if (action) {
       this.userActions.next({ name: action, value: true });
     }

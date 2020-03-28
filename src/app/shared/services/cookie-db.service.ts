@@ -7,7 +7,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 function parseQuery<T>(query: string): T {
   const querryArr = query.split('&');
-  console.log({querryArr});
   const queryObj = {};
   querryArr.forEach(param => {
     const [key, value] = param.split('=');
@@ -24,17 +23,21 @@ const PATHS = {
   'http://localhost:3000/user/create': COOKIE_NAME.USER,
   'http://localhost:3000/user/remove': COOKIE_NAME.USER,
   'http://localhost:3000/user/list': COOKIE_NAME.USER,
+  'http://localhost:3000/user/get': COOKIE_NAME.USER,
 };
 
 const PATHS_MESSAGE_SUCCESS = {
+  'http://localhost:3000/user/get': 'User Found!',
   'http://localhost:3000/user/create': 'User created!',
   'http://localhost:3000/user/remove': 'User removed!',
   'http://localhost:3000/user/list': 'Users found!'
 };
 
+const userNotFoundMessage = 'User not found!';
 const PATHS_MESSAGE_ERROR = {
   'http://localhost:3000/user/create': 'User already exists!',
-  'http://localhost:3000/user/remove': 'User not found!',
+  'http://localhost:3000/user/remove': userNotFoundMessage,
+  'http://localhost:3000/user/get': userNotFoundMessage,
 };
 const PATHS_INDEX = {
   'http://localhost:3000/user/create': 'name'
@@ -56,7 +59,7 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
   get(path: string): Observable<IGenericResponse<any>> {
     const { pathUrl, query } = this._getQuery<{ id: string }>(path);
     const { errorMessage, successMessage, cookieName } = this._options(pathUrl);
-    const { response, status } = this._response(errorMessage);
+    const { response, status } = this._response(errorMessage, 404);
     const listRegex = /(\/list\/?)/gim;
     const getRegex = /(\/get\/?)/gim;
 
@@ -70,6 +73,14 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
         response.message = `No ${successMessage.toLowerCase()}`;
       }
     } else if ( getRegex.test(path) ) {
+      console.log({ n: `${cookieName}${query.id}` });
+      const cookie = this._get(`${cookieName}${query.id}`);
+      console.log( {cookie} );
+      if ( cookie ) {
+        response.error = false;
+        response.data = cookie;
+        response.message = successMessage;
+      }
     }
 
     if (!response.error) {
@@ -120,6 +131,7 @@ export class CookieDbService<ServiceResponse, Model> implements IRequestService<
     return true;
   }
   private _get(cookieName: string): Model {
+    console.log({c: this.cookies.check(cookieName), n: cookieName})
     if ( this.cookies.check(cookieName) ) {
       return JSON.parse(this.cookies.get(cookieName)) as Model;
     } else {

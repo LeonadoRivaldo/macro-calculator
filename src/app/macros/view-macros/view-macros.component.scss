@@ -1,0 +1,29 @@
+@import '../../../assets/sass/imports';
+
+.macro-container{
+  height: 50vh;
+  padding: 20px;
+
+  .macro-menu{
+    border-right:  1px solid $cinza-bordas;
+    .botao{
+      justify-content: start;
+      width: 100%;
+      margin: 5px 0;
+      transition: all ease 0.5s;
+      color: $cinza-escuro;
+
+      fa-icon{
+        padding-right: 5px;
+      }
+
+      &.active,
+      &:hover{
+        color: $branco;
+        border-color:  $macro-calc-info;
+        background-color: $macro-calc-info;
+      }
+    }
+  }
+
+}

@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UsersComponent } from './users.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { MacrosModule } from '../macros/macros.module';
 
 
 
@@ -15,6 +16,7 @@ import { UserCardComponent } from './user-card/user-card.component';
     CommonModule,
     SharedModule,
     UserRoutingModule,
+    MacrosModule
   ]
 })
 export class UsersModule { }

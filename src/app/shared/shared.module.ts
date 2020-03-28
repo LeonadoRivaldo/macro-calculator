@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [ CookieService ],
   exports: [
     HeaderComponent, InputComponent, AddButtonComponent,
-    FontAwesomeModule, FormsModule, ReactiveFormsModule,
+    FontAwesomeModule, FormsModule, ReactiveFormsModule, NgbModule,
   ]
 })
 export class SharedModule { }
