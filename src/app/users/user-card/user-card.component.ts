@@ -29,7 +29,6 @@ export class UserCardComponent implements OnInit {
     private readonly userService: UserService
   ) {
     modalConfig.keyboard = true;
-    modalConfig.centered = true;
   }
 
   ngOnInit(): void {

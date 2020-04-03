@@ -1,40 +1,63 @@
-<div class="d-flex macro-container" >
-  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills macro-menu pr-4" orientation="vertical">
-    <li ngbNavItem="calories">
-      <a class="botao btn-default btn-linha" ngbNavLink>
-        <fa-icon class="remove" [icon]="icons.calories"></fa-icon>
-        Calories
-      </a>
-      <ng-template ngbNavContent>
-        <p>This is where calories will be, bulk, cuting and maintenance</p>
-        <!-- add info on each -->
-      </ng-template>
-    </li>
-    <li ngbNavItem="macros">
-      <a class="botao btn-default btn-linha" ngbNavLink>
-        <fa-icon class="remove" [icon]="icons.macros"></fa-icon>
-        Macro Nutrients
-      </a>
-      <ng-template ngbNavContent>
-        <p>Macro nutrients, Proteins, Carbohydrate and Fats</p>
-        <!-- add info on each -->
-      </ng-template>
-    </li>
-    <li ngbNavItem="info">
-      <a class="botao btn-default btn-linha" ngbNavLink>
-        <fa-icon class="remove" [icon]="icons.user"></fa-icon>
-        User Info
-      </a>
-      <ng-template ngbNavContent>
-        <p>User info</p>
-      </ng-template>
-    </li>
-  </ul>
+<div class="macro-container container-fluid" >
+  <div class="macro-content row">
+    <ul
+      class="nav-pills macro-menu pl-3 col-12 col-lg-3"
+      ngbNav
+      #nav="ngbNav"
+      [(activeId)]="active"
+      orientation="vertical">
+        <li ngbNavItem="calories">
+          <a class="botao btn-default btn-linha" ngbNavLink>
+            <fa-icon class="remove" [icon]="icons.calories"></fa-icon>
+            Calories
+          </a>
+          <ng-template ngbNavContent>
+            <div class="row macro-items calories">
+              <div class="col-12 calories-item" *ngFor="let item of Macros.calories">
+                <div class="card {{item.calc}}">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <fa-icon class="remove" [icon]="item.icon || icons[item.calc]"></fa-icon>
+                      {{item.title}}
+                    </h5>
+                    <!-- h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6 -->
+                    <p class="card-text"> {{getCalories(item.calc)}} Kcal </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+
+
+
+          </ng-template>
+        </li>
+        <li ngbNavItem="macros">
+          <a class="botao btn-default btn-linha" ngbNavLink>
+            <fa-icon class="remove" [icon]="icons.macros"></fa-icon>
+            Macro Nutrients
+          </a>
+          <ng-template ngbNavContent>
+            <p>Macro nutrients, Proteins, Carbohydrate and Fats</p>
+            <!-- add info on each -->
+          </ng-template>
+        </li>
+        <li ngbNavItem="info">
+          <a class="botao btn-default btn-linha" ngbNavLink>
+            <fa-icon class="remove" [icon]="icons.user"></fa-icon>
+            User Info
+          </a>
+          <ng-template ngbNavContent>
+            <p>User info</p>
+          </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="col-12 col-lg-9"></div>
+  </div>
+
+
 
   <a class="close">
-
   </a>
 
 </div>

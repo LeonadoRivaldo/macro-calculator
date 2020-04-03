@@ -1,11 +1,88 @@
 @import '../../../assets/sass/imports';
+$cardList: ();
+$cardList: map-merge(
+  (
+    'bulk': $cor-padrao,
+    'maintenance': $macro-calc-success,
+    'cutting': $macro-calc-danger,
+  ),
+  $cardList
+);
+
+@mixin card($parent, $color) {
+  &#{$parent}{
+    border-color: $color;
+    .card-title{
+      color: $color;
+      font-weight: bold;
+      fa-icon{
+        color: inherit;
+      }
+    }
+  }
+}
 
 .macro-container{
-  height: 50vh;
-  padding: 20px;
+  padding: 15px;
+
+  @media (min-width: $lg) {
+    height: 50vh;
+  }
+
+  .macro-content{
+    height: 100%;
+
+    /* content */
+    .macro-items{
+      padding-top: 15px;
+
+      @media (min-width: $lg) {
+        padding-top: 0;
+      }
+
+      &.calories{
+        .calories-item{
+          margin: 5px 0;
+
+
+
+          &:first-child{
+            margin-top: 0;
+          }
+          &:last-child{
+            margin-bottom: 0;
+          }
+
+        }
+      }
+    }
+
+
+
+    .card{
+      //subclasses
+      @each $card, $value in $cardList {
+        @include card(".#{$card}", $value);
+      }
+    }
+
+  }
 
   .macro-menu{
-    border-right:  1px solid $cinza-bordas;
+    border-bottom:  1px solid $cinza-bordas;
+    padding-bottom: 15px;
+
+    @media (min-width: $lg) {
+      padding: {
+        left: 15px;
+        right: 15px;
+      };
+      padding-bottom: 0;
+      border-bottom: 0;
+      border-right:  1px solid $cinza-bordas;
+    }
+
+
     .botao{
       justify-content: start;
       width: 100%;
