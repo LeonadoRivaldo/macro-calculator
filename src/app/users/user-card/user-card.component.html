@@ -4,7 +4,7 @@
     <h5 class="card-title hide-text-overflow" [title]="name">{{name}}</h5>
 
     <div class="actions">
-      <fa-icon class="view" [icon]="icons.faEye" (click)="view()"></fa-icon>
+      <fa-icon *ngIf="!isView" class="view" [icon]="icons.faEye" (click)="view()"></fa-icon>
       <fa-icon class="edit" [icon]="icons.faEdit" (click)="edit()"></fa-icon>
       <fa-icon class="remove" [icon]="icons.faTrashAlt" (click)="remove()"></fa-icon>
     </div>

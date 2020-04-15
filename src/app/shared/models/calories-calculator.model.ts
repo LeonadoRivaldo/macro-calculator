@@ -3,11 +3,11 @@ import { IUser } from './user.model';
 
 
 export interface ICaloriesCalculator {
-  bulk: ICaloriesCalcFn;
-  cutting: ICaloriesCalcFn;
-  maintenance: ICaloriesCalcFn;
-  TMB: ICaloriesCalcFn;
+  bulk: ICalcFn;
+  cutting: ICalcFn;
+  maintenance: ICalcFn;
+  TMB: ICalcFn;
 }
 
 
-export type ICaloriesCalcFn = (user: IUser) => number;
+export type ICalcFn = (user: IUser) => number;

@@ -11,7 +11,7 @@ import { MacrosModule } from '../macros/macros.module';
 
 
 @NgModule({
-  declarations: [ UserListComponent, UserFormComponent, UsersComponent, UserCardComponent],
+  declarations: [ UserListComponent, UserFormComponent, UsersComponent],
   imports: [
     CommonModule,
     SharedModule,

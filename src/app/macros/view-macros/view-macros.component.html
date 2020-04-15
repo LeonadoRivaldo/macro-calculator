@@ -1,4 +1,4 @@
-<div class="macro-container container-fluid" >
+<div class="macro-container container-fluid" *ngIf="loaded">
   <div class="macro-content row">
     <ul
       class="nav-pills macro-menu pl-3 col-12 col-lg-3"
@@ -38,7 +38,32 @@
             Macro Nutrients
           </a>
           <ng-template ngbNavContent>
-            <p>Macro nutrients, Proteins, Carbohydrate and Fats</p>
+            <div class="row macro-items macros">
+              <div class="col-12">
+                <p>Macro nutrients, Proteins, Carbohydrate and Fats</p>
+                <p><small>Carbohydrates are calculated based on the remaining calories divide by 4</small></p>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th class="calories-item {{item.calc}}" scope="col" *ngFor="let item of Macros.calories">
+                        <fa-icon [icon]="icons[item.calc]"></fa-icon>
+                        {{ item.title }}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let macro of Macros.macros; let $f = first">
+                      <th class="macro-item title {{macro.calc}}" scope="col" >
+                        <fa-icon [icon]="icons[macro.calc]"></fa-icon>
+                        {{ macro.title }}
+                      </th>
+                      <td class="macro-item {{macro.calc}}" *ngFor="let calorie of Macros.calories">{{calcMacros(macro.calc, calorie.calc)}}g</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <!-- add info on each -->
           </ng-template>
         </li>
@@ -48,7 +73,7 @@
             User Info
           </a>
           <ng-template ngbNavContent>
-            <p>User info</p>
+            <mc-user-card [user]="uInfo" [isView]="true"></mc-user-card>
           </ng-template>
         </li>
     </ul>

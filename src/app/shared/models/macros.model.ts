@@ -5,6 +5,7 @@ export interface IMacros {
 export interface IMacroItem {
   calc: string;
   title: string;
+  macro?: string;
   icon?: string;
   description?: string;
 }

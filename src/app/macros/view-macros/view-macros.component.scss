@@ -55,17 +55,33 @@ $cardList: map-merge(
 
         }
       }
-    }
+
+      &.macros{
+        .table{
+          .calories-item{}
+          .macro-item{
+            &.fats{}
+            &.carbo{}
+            &.proteins{}
+
+            &.fats,
+            &.proteins{ }
 
 
+            &.title{
+              text-align: left;
+            }
+          }
+        }
+      }
 
-    .card{
-      //subclasses
-      @each $card, $value in $cardList {
-        @include card(".#{$card}", $value);
+      .card{
+        //subclasses
+        @each $card, $value in $cardList {
+          @include card(".#{$card}", $value);
+        }
       }
     }
-
   }
 
   .macro-menu{

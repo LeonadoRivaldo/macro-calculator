@@ -13,6 +13,7 @@ import { ViewMacrosComponent } from 'src/app/macros/view-macros/view-macros.comp
 })
 export class UserCardComponent implements OnInit {
   @Input() user: IUser;
+  @Input() isView = false;
 
   icons = { faEdit, faTrashAlt, faEye };
   userProps = Object.keys;
